@@ -1,0 +1,173 @@
+<p>register works!</p>
+<div class="container ">
+    <div class="row py-2 mt-1 align-items-center">
+        <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt=""
+                class="img-fluid mb-3 d-none d-md-block">
+            <h1>Create an Account</h1>
+        </div>
+        <!-- Registeration Form -->
+        <div class="col-md-7 col-lg-6 ml-auto">
+            <h2 class="text-center mb-4">Register</h2>
+            <div *ngIf="errorMessage" class="alert-danger alert py-2">{{errorMessage}}</div>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <div class="row">
+                    <!-- First Name -->
+                    <!-- First Name -->
+                    <div class="input-group col-lg-6 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2 fa-user text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="userName" id="userName" type="text" name="userName"
+                            placeholder="First Name" class="form-control d-block rounded-0 bg-white border-start-0 border-md">
+                        <!-- Error message -->
+                        <div *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('userName')?.errors?.['required']">
+                                Username is required.
+                            </div>
+                            <div *ngIf="registerForm.get('userName')?.errors?.['minlength']">
+                                Username must be at least 3 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Email Address -->
+                    <div class="input-group col-lg-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2 fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="email" id="email" type="email" name="email" placeholder="Email Address"
+                            class="form-control d-block bg-white rounded-0 border-start-0 border-md">
+                        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('email')?.getError('required')">
+                                Email is required.
+                            </div>
+                            <div *ngIf="registerForm.get('email')?.getError('email')">
+                                Invalid email format.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Phone Number -->
+                    <div class="input-group col-lg-6 mb-3" [class.invalid]="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa-solid fa-phone py-2 text-muted "></i>
+                            </span>
+                        </div>
+                        <input formControlName="phoneNumber" id="phone" type="tel" name="phone"
+                            placeholder="phone Number" class="form-control d-block bg-white rounded-0 border-start-0 border-md">
+                        <div *ngIf="registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('phoneNumber')?.getError('required')">
+                                Phone number is required.
+                            </div>
+                            <div *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">
+                                Please enter a valid Egyptian phone number.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group col-lg-12 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white rounded-0  px-3 border-md border-right-0">
+                                <i class="fa-solid fa-user-group py-2 text-muted "></i>
+                            </span>
+                        </div>
+                        <select formControlName="role" id="type" name="type"
+                            class="form-control d-block rounded-0 border-start-0  border-right-0 border-md">
+                            <option  class="text-dark" value="0">--Choose your Type--</option>
+                            <option value="customer">Customer</option>
+                            <option value="vendor">Vendor</option>
+                        </select>
+                        <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('role')?.getError('required')">Role is required.</div>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group col-lg-6 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2  fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="password" id="password" type="password" name="password"
+                            placeholder="Password" class="form-control d-block rounded-0 bg-white border-start-0 border-md">
+                        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('password')?.getError('required')">Password is required.</div>
+                            <div *ngIf="registerForm.get('password')?.getError('pattern')">Enter Complex Password.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Password Confirmation -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2 fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="confirmPassword" id="passwordConfirmation" type="password"
+                            name="passwordConfirmation" placeholder="Confirm Password"
+                            class="form-control d-block bg-white border-start-0 border-md">
+                        <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="registerForm.get('confirmPassword')?.getError('required')">Confirmation password
+                                is
+                                required.</div>
+                            <div *ngIf="registerForm.get('confirmPassword')?.getError('mustMatch')">Passwords must
+                                match.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary btn-block py-2">
+                            <span class="font-weight-bold">Create your account</span>
+                        </button>
+                    </div>
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-3 small text-muted font-weight-bold text-muted">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class=" row col-lg-12 mx-auto">
+                        <div class="col-12 col-md-6 p-2">
+                            <button class="btn btn-primary btn-block py-2 w-100  btn-facebook">
+                                <i class="fa-brands fa-facebook mx-2 fs-5"></i>
+                                <span class="font-weight-bold">Continue with Facebook</span>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6 p-2">
+                            <button class="btn btn-primary btn-block py-2 w-100  btn-twitter     ">
+                                <i class="fa-brands fa-twitter mx-2 fs-5"></i>
+                                <span class="font-weight-bold">Continue with Twitter</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100">
+                        <button (click)="navigateToLogin()" class="text-muted btn border-0 border font-weight-bold">Already Registered?
+                            <a class="text-primary ml-2">Login</a>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

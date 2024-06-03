@@ -1,0 +1,395 @@
+<div class="container">
+    <form [formGroup]="addProperty" (submit)="submitNewProperty()" #form enctype="multipart/form-data">
+        <div class="p-4 border border-2 my-4 bg-white">
+            <div>
+                <h3 class="top-title">Property Description And Price</h3>
+                <div class="px-md-5 p-2 py-3">
+                    <div class="form-group mb-3">
+                        <label class="" for="PropertyTitle">Property Title</label>
+                        <input formControlName="Title" class="form-control rounded-0" type="text"
+                            class="form-control rounded-0 " id="PropertyTitle" placeholder="Enter your property title">
+                        <div *ngIf="addProperty.get('Title')?.invalid && addProperty.get('Title')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Title')?.errors?.['required']">
+                                Title is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="PropertyDescription">Property Description</label>
+                        <textarea formControlName="Description" class="form-control bg-light rounded-0"
+                            placeholder="Describe about your property" id="PropertyDescription" rows="5 "></textarea>
+                        <div *ngIf="addProperty.get('Description')?.invalid && addProperty.get('Description')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Description')?.errors?.['required']">
+                                Description is required.
+                            </div>
+                            <div *ngIf="addProperty.get('Description')?.errors?.['minlength']">
+                                Description must be at least 400 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12  my-md-1 my-2">
+                            <div class="form-group">
+                                <div class="">
+                                    <label class="">Select Status</label>
+                                    <select formControlName="Status" class="form-select  rounded-0">
+                                        <option value="Rent" class="">Rent</option>
+                                        <option value="Sale" class="">Sale</option>
+                                    </select>
+                                    <div *ngIf="addProperty.get('Status')?.invalid && addProperty.get('Status')?.touched"
+                                        class="w-100 d-block text-danger">
+                                        <div *ngIf="addProperty.get('Status')?.errors?.['required']">
+                                            Status is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 my-md-1 my-2 ">
+                            <div class="form-group ">
+                                <div class="  ">
+                                    <label class="">Type</label>
+                                    <select formControlName="Type" class="form-select  rounded-0">
+                                        <option value="1" class="">house</option>
+                                        <option value="2" class="">commercial</option>
+                                        <option value="3" class="">apartment</option>
+                                        <option value="4" class="">lot</option>
+                                        <option value="5" class="">garage</option>
+                                    </select>
+                                    <div *ngIf="addProperty.get('Type')?.invalid && addProperty.get('Type')?.touched"
+                                        class="w-100 d-block text-danger">
+                                        <div *ngIf="addProperty.get('Type')?.errors?.['required']">
+                                            Type is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group my-md-1 my-2">
+                                <label for="price">Price</label>
+                                <input formControlName="Price" class="form-control rounded-0 " type="text" name="price"
+                                    placeholder="USD" id="price">
+                                <div *ngIf="addProperty.get('Price')?.invalid && addProperty.get('Price')?.touched"
+                                    class="w-100 d-block text-danger">
+                                    <div *ngIf="addProperty.get('Price')?.errors?.['required']">
+                                        Price is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group my-md-1 my-2">
+                                <label for="area">Area</label>
+                                <input formControlName="Area" class="form-control rounded-0" type="text" name="area"
+                                    placeholder="Sqft" id="area">
+                                <div *ngIf="addProperty.get('Area')?.invalid && addProperty.get('Area')?.touched"
+                                    class="w-100 d-block text-danger">
+                                    <div *ngIf="addProperty.get('Area')?.errors?.['required']">
+                                        Area is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- image-uploader.component.html -->
+        <div class="p-4 border border-2 my-4 bg-white">
+            <div>
+                <h3 class="top-title">Property Media</h3>
+                <div class="px-md-5 row p-2 py-3">
+                    <div class="col-12 col-md-3 col-sm-6 p-3">
+                        <h3>Upload image 1</h3>
+                        <div class="images d-flex justify-content-center align-items-center">
+                            <div>
+                                <label [ngClass]="{'d-none': image1 != null}" for="file1">
+                                    <i id="iconUpload" class="fa-solid fa-cloud-arrow-up fa-2xl"></i>
+                                </label>
+                                <input formControlName="Image1" type="file" id="file1"
+                                    (change)="onFileChange($event)" />
+                                <label [ngClass]="{'d-none': image1 == null}" for="file1">
+                                    <img class="w-100" *ngIf="image1" [src]="image1" alt="Selected Image">
+                                </label>
+                            </div>
+                        </div>
+                        <div *ngIf="addProperty.get('Image1')?.invalid && addProperty.get('Image1')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Image1')?.errors?.['required']">
+                                Image1 is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 col-sm-6 p-3">
+                        <h3>Upload image 2</h3>
+                        <div class="images d-flex justify-content-center align-items-center">
+                            <div>
+                                <label [ngClass]="{'d-none': image2 != null}" for="file2">
+                                    <i id="iconUpload" class="fa-solid fa-cloud-arrow-up fa-2xl"></i>
+                                </label>
+                                <input formControlName="Image2" type="file" id="file2"
+                                    (change)="onFileChange($event)" />
+                                <label [ngClass]="{'d-none': image2 == null}" for="file2">
+                                    <img class="w-100" *ngIf="image2" [src]="image2" alt="Selected Image">
+                                </label>
+                            </div>
+                        </div>
+                        <div *ngIf="addProperty.get('Image2')?.invalid && addProperty.get('Image2')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Image2')?.errors?.['required']">
+                                Image2 is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 col-sm-6 p-3">
+                        <h3>Upload image 3</h3>
+                        <div class="images d-flex justify-content-center align-items-center">
+                            <div>
+                                <label [ngClass]="{'d-none': image3 != null}" for="file3">
+                                    <i id="iconUpload" class="fa-solid fa-cloud-arrow-up fa-2xl"></i>
+                                </label>
+                                <input formControlName="Image3" type="file" id="file3"
+                                    (change)="onFileChange($event)" />
+                                <label [ngClass]="{'d-none': image3 == null}" for="file3">
+                                    <img class="w-100" *ngIf="image3" [src]="image3" alt="Selected Image">
+                                </label>
+                            </div>
+                        </div>
+                        <div *ngIf="addProperty.get('Image3')?.invalid && addProperty.get('Image3')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Image3')?.errors?.['required']">
+                                Image3 is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 col-sm-6 p-3">
+                        <h3>Upload image 4</h3>
+                        <div class="images d-flex justify-content-center align-items-center">
+                            <div>
+                                <label [ngClass]="{'d-none': image4 != null}" for="file4">
+                                    <i id="iconUpload" class="fa-solid fa-cloud-arrow-up fa-2xl"></i>
+                                </label>
+                                <input formControlName="Image4" type="file" id="file4"
+                                    (change)="onFileChange($event)" />
+                                <label [ngClass]="{'d-none': image4 == null}" for="file4">
+                                    <img class="w-100" *ngIf="image4" [src]="image4" alt="Selected Image">
+                                </label>
+                            </div>
+                        </div>
+                        <div *ngIf="addProperty.get('Image4')?.invalid && addProperty.get('Image4')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="addProperty.get('Image4')?.errors?.['required']">
+                                Image4 is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border border-2 my-4 bg-white">
+                <div>
+                    <h3 class="top-title">Property Location</h3>
+                    <div class="px-md-5 p-2 ">
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group my-md-1 my-2">
+                                    <label class="">Governorates</label>
+                                    <select formControlName="Governorate" class="form-select rounded-0"
+                                        (change)="onChange($event)">
+                                        <option *ngFor="let governorate of governorates"
+                                            [value]="governorate.governorateID">{{
+                                            governorate.name }}</option>
+                                    </select>
+                                    <div *ngIf="addProperty.get('Governorate')?.invalid && addProperty.get('Governorate')?.touched"
+                                        class="w-100 d-block text-danger">
+                                        <div *ngIf="addProperty.get('Governorate')?.errors?.['required']">
+                                            Governorate is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [ngClass]="{'d-none': foundedCities==false}"  class="col-lg-6 col-md-12">
+                                <div class="form-group my-md-1 my-2">
+                                    <label for="area">City</label>
+                                    <select formControlName="City" class="form-select rounded-0">
+                                        <option *ngFor="let city of cities" [value]="city.id" class="">{{city.name}}
+                                        </option>
+                                    </select>
+                                    <!-- <div *ngIf="addProperty.get('City')?.invalid && addProperty.get('City')?.touched"
+                                        class="w-100 d-block text-danger">
+                                        <div *ngIf="addProperty.get('City')?.errors?.['required']">
+                                            City is required.
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border border-2 my-4 bg-white">
+                <div>
+                    <h3 class="top-title">Extra Information</h3>
+                    <div class="px-md-5 p-2 py-3">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 dropdown faq-drop">
+                                <div class="form-group categories">
+                                    <div>
+                                        <label for="age">Select Age</label>
+                                        <select formControlName="Age" id="age" class="form-select rounded-0">
+                                            <option value="1" class="option">0-1 years</option>
+                                            <option value="2" class="option">0-5 years</option>
+                                            <option value="1" class="option">0-10 years</option>
+                                            <option value="2" class="option">0-15 years</option>
+                                            <option value="1" class="option">0-20 years</option>
+                                            <option value="2" class="option">0-50 years</option>
+                                            <option value="1" class="option">50+ years</option>
+                                        </select>
+                                        <div *ngIf="addProperty.get('Age')?.invalid && addProperty.get('Age')?.touched"
+                                            class="w-100 d-block text-danger">
+                                            <div *ngIf="addProperty.get('Age')?.errors?.['required']">
+                                                Age is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 dropdown faq-drop">
+                                <div class="form-group categories">
+                                    <div>
+                                        <label for="rooms">Select Rooms</label>
+                                        <select formControlName="RoomsNumber" id="rooms" class="form-select  rounded-0">
+                                            <option value="1" class="option">1</option>
+                                            <option value="2" class="option">2</option>
+                                            <option value="1" class="option">3</option>
+                                            <option value="2" class="option">4</option>
+                                            <option value="1" class="option">5</option>
+                                            <option value="2" class="option">6</option>
+                                        </select>
+                                        <div *ngIf="addProperty.get('RoomsNumber')?.invalid && addProperty.get('RoomsNumber')?.touched"
+                                            class="w-100 d-block text-danger">
+                                            <div *ngIf="addProperty.get('RoomsNumber')?.errors?.['required']">
+                                                RoomsNumber is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 ">
+                                <div class="">
+                                    <div class="">
+                                        <label for="bathrooms">Select Bathrooms</label>
+                                        <select formControlName="BathroomNumber" id="bathrooms"
+                                            class="form-select   rounded-0">
+                                            <option value="1" class="option">1</option>
+                                            <option value="2" class="option">2</option>
+                                            <option value="1" class="option">3</option>
+                                            <option value="2" class="option">4</option>
+                                            <option value="1" class="option">5</option>
+                                            <option value="2" class="option">6</option>
+                                        </select>
+                                        <div *ngIf="addProperty.get('BathroomNumber')?.invalid && addProperty.get('BathroomNumber')?.touched"
+                                            class="w-100 d-block text-danger">
+                                            <div *ngIf="addProperty.get('BathroomNumber')?.errors?.['required']">
+                                                BathroomNumber is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border border-2 my-4 bg-white">
+                <div>
+                    <h3 class="top-title">Property Features</h3>
+                    <div class="px-md-5 p-2 py-3">
+                        <div class="">
+                            <div class="col-md-12 d-flex flex-wrap">
+                                <div class="px-3 mx-1 py-2" *ngFor="let feature of propertyFeatures">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" [id]="feature.id"
+                                            [formControl]="feature.control" />
+                                        <label class="form-check-label" [for]="feature.id">{{ feature.name }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border border-2 my-4 bg-white">
+                <div>
+                    <h3 class="top-title">Contact Information</h3>
+                    <div class="px-md-5 p-2 ">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <p>
+                                    <label for="con-name">Name</label>
+                                    <input formControlName="Name" class="form-control rounded-0" type="text"
+                                        placeholder="Enter Your Name" id="con-name" name="con-name">
+                                </p>
+                                <div *ngIf="addProperty.get('Name')?.invalid && addProperty.get('Name')?.touched"
+                                    class="w-100 d-block text-danger">
+                                    <div *ngIf="addProperty.get('Name')?.errors?.['required']">
+                                        Name is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <p>
+                                    <label for="con-user">Username</label>
+                                    <input formControlName="UserName" value="wwww" readonly
+                                        class="form-control rounded-0" type="text" placeholder="Enter Your Username"
+                                        id="con-user" name="con-user">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <p class="no-mb first">
+                                    <label for="con-email">Email</label>
+                                    <input formControlName="Email" readonly class="form-control rounded-0" type="email"
+                                        placeholder="Enter Your Email" id="con-email" name="con-email">
+                                </p>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="no-mb last">
+                                    <label for="con-phn">Phone</label>
+                                    <input formControlName="Phone" class="form-control rounded-0" type="text"
+                                        placeholder="Enter Your Phone Number" id="con-phn" name="con-phn">
+                                    <div *ngIf="addProperty.get('Phone')?.invalid && addProperty.get('Phone')?.touched"
+                                        class="w-100 d-block text-danger">
+                                        <div *ngIf="addProperty.get('Phone')?.errors?.['required']">
+                                            Phone is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ngx-spinner *ngIf="isPanar" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+                                        type="square-jelly-box" [fullScreen]="true">
+                                        <p style="color: white"> Loading... </p>
+                                    </ngx-spinner>
+                                    <div class="prperty-submit-button">
+                                        <button [disabled]="!addProperty.valid" type="submit"
+                                            class="btn rounded-0  w-auto px-3 py-2 bg-btn">Add
+                                            Property</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row  py-2 my-1 mb-3 align-items-center">
+
+        <div class="col-md-7 card col-lg-6 m-auto ">
+            <h2 class="text-center my-3 ">Login</h2>
+            <div *ngIf="errorMessage" class="alert-danger alert py-2">{{errorMessage}}</div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <div class="row">
+                    <!-- Email Address -->
+                    <div class="input-group col-lg-12 my-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2 fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="email" id="email" type="email" name="email" placeholder="Email Address"
+                            class="form-control d-block bg-white rounded-0 border-start-0 border-md">
+                        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="loginForm.get('email')?.getError('required')">
+                                Email is required.
+                            </div>
+                            <div *ngIf="loginForm.get('email')?.getError('email')">
+                                Invalid email format.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="input-group col-lg-6 my-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text rounded-0 bg-white px-3 border-md border-end-0">
+                                <i class="fa py-2  fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input formControlName="password" id="password" type="password" name="password"
+                            placeholder="Password"
+                            class="form-control d-block rounded-0 bg-white border-start-0 border-md">
+                        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                            class="w-100 d-block text-danger">
+                            <div *ngIf="loginForm.get('password')?.getError('required')">Password is required.</div>
+                            <!-- <div *ngIf="loginForm.get('password')?.getError('pattern')">Enter Complex Password. -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="form-group col-lg-12 mx-auto mb-0">
+                    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block py-2">
+                        <span class="font-weight-bold px-3 ">Login</span>
+                    </button>
+                </div>
+
+                <!-- Divider Text -->
+                <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                    <div class="border-bottom w-100 ml-5"></div>
+                    <span class="px-3 small text-muted font-weight-bold text-muted">OR</span>
+                    <div class="border-bottom w-100 mr-5"></div>
+                </div>
+
+                <!-- Social Login -->
+                <div class=" row col-lg-12 mx-auto">
+                    <div class="col-12 col-md-6 p-2">
+                        <button class="btn btn-primary btn-block py-2 w-100  btn-facebook">
+                            <i class="fa-brands fa-facebook mx-2 fs-5"></i>
+                            <span class="font-weight-bold">Continue with Facebook</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <button class="btn btn-primary btn-block py-2 w-100  btn-twitter     ">
+                            <i class="fa-brands fa-twitter mx-2 fs-5"></i>
+                            <span class="font-weight-bold">Continue with Twitter</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Already Registered -->
+                <div class="text-center w-100">
+                    <button (click)="navigateToRegister()" class="text-muted btn border-0 border font-weight-bold">
+                        Registered?
+                        <a class="text-primary ml-2">Register</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

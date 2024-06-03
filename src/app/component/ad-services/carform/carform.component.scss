@@ -1,0 +1,91 @@
+.top-title {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    color: #FF385C;
+    text-transform: capitalize;
+    font-size: 27px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 9000;
+}
+
+label {
+    color: #333;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 6px;
+}
+
+select,
+input[type="text"],
+input[type="email"] {
+    height: 45px;
+}
+select,
+input[type="text"],
+input[type="email"] :focus{
+    box-shadow: none !important;
+  
+}
+
+.images {
+    height: 230px;
+    border: #1ABC9C 4px dashed;
+    cursor: pointer;
+    overflow: hidden;
+    /* background-image: url("../../../assets/DefaultImages/image.png");
+    background-position: 100%;
+    background-size: contain;
+    background-repeat: no-repeat; */
+}
+
+#iconUpload {
+    color: #1ABC9C;
+    font-size: 90px;
+}
+
+h4[class="text-center"] {
+    color: #1ABC9C;
+    font-size: 2vw !important;
+}
+
+
+.form-check-input {
+    border-radius: 3px;
+    font-size: 20px;
+
+}
+
+.form-check-input:checked {
+    background-color: #FF385C !important;
+    border-color: #FF385C;
+
+}
+
+.form-check-input:focus {
+    box-shadow: none !important;
+    border-color: #FF385C;
+}
+
+.bg-btn {
+    background-color: #FF385C;
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    height: 100%;
+    text-transform: capitalize;
+}
+
+.bg-btn:hover {
+    background-color: #333;
+}
+
+input[type="file"]{
+    width: 0px;
+}
